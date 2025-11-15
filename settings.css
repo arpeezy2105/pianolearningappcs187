@@ -1,0 +1,98 @@
+body {
+    background: linear-gradient(180deg, #3e3b92 0%, #1a1a1e 100%);
+}
+
+.settings-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px 30px;
+    background-color: transparent;
+    flex-grow: 1;
+}
+
+.setting-card {
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 12px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.setting-card h2 {
+    font-size: 1.3em;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    color: #555;
+}
+.setting-row label {
+    font-weight: 500;
+}
+.setting-row .value {
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.setting-row select,
+.setting-row .audio-slider {
+    flex-basis: 50%;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9em;
+}
+.setting-row .audio-slider {
+    padding: 0;
+    accent-color: var(--color-primary);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn:hover {
+    background-color: var(--color-primary-hover); 
+}
+.btn-secondary {
+    background-color: #6c757d;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+.btn-danger {
+    background-color: var(--color-accent); 
+}
+.btn-danger:hover {
+    background-color: var(--color-danger-hover);
+}
+
+.footer-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}

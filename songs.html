@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song List</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="songs.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="logo">Name of APP</div>
+        <div class="current-song">Select a Song</div>
+        <nav class="nav-icons">
+            <a href="index.html" class="home-icon">🏠</a>
+            <a href="songs.html" class="nav-active">🎵</a> 
+            <a href="settings.html">👤</a>
+        </nav>
+    </header>
+
+    <main class="song-list-container">
+        
+        <h1>List of Songs</h1>
+        
+        <div class="search-bar-container">
+            <input type="search" class="search-bar" placeholder="Search for songs...">
+            <button class="upload-btn">
+                <span>📤</span> 
+                Upload File
+            </button>
+        </div>
+        
+        <h2>Recommended Songs</h2>
+        <table class="song-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Length</th>
+                    <th>Save</th>
+                </tr>
+            </thead>
+            <tbody id="recommended-songs-body">
+                <tr>
+                    <td>Fur Elise</td>
+                    <td>Beethoven</td>
+                    <td>4:15</td> 
+                    <td><span class="heart-icon">♡</span></td>
+                </tr>
+                <tr>
+                    <td>Canon in D</td>
+                    <td>Pachelbel</td>
+                    <td>5:30</td> 
+                    <td><span class="heart-icon active">♥</span></td> 
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Uploaded Songs</h2>
+        <table class="song-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Save</th>
+                </tr>
+            </thead>
+            <tbody id="uploaded-songs-body">
+                <tr>
+                    <td>My_Song_Final.mid</td>
+                    <td>You</td>
+                    <td>11/09/2025</td>
+                    <td><span class="heart-icon">♡</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/midi-parser-js@4.0.4/build/midi-parser.min.js"></script>
+    
+    <script src="songs.js"></script>
+</body>
+</html>

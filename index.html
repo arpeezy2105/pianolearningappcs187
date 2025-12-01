@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano App Homepage</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script defer src="index.js"></script>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="logo">Piano Learning App</div>
+        <div class="current-song">Name of selected song</div>
+        <nav class="nav-icons">
+            <a href="index.html" class="home-icon nav-active">🏠</a>
+            <a href="songs.html">🎵</a>
+            <a href="settings.html">👤</a>
+        </nav>
+    </header>
+
+    <main class="score-area">
+        <div class="play-button-container">
+            <div class="play-button"></div>
+            <span>Whenever you ready, press start</span>
+        </div>
+    </main>
+
+    <div class="controls-bar">
+        <div class="control-group speed-controls">
+            <label for="speed-select">Speed:</label>
+            <select id="speed-select" class="speed-select-dropdown">
+                <option value="2.0">x2.0</option>
+                <option value="1.5">x1.5</option>
+                <option value="1.0" selected>x1.0</option>
+                <option value="0.75">x0.75</option>
+                <option value="0.5">x0.5</option>
+            </select>
+        </div>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+            <div class="progress-handle"></div>
+        </div>  
+
+        <div class="control-group mode-controls">
+            <button>Test</button>
+            <button class="active">Practice</button>
+        </div>
+    </div>
+
+    <div class="keyboard">
+
+        <!-- Octave 3 -->
+        <div class="key-wrapper"><div class="key white" data-key="C3"></div><div class="key black" data-key="C#3"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="D3"></div><div class="key black" data-key="D#3"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="E3"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="F3"></div><div class="key black" data-key="F#3"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="G3"></div><div class="key black" data-key="G#3"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="A3"></div><div class="key black" data-key="A#3"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="B3"></div></div>
+
+        <!-- Octave 4 -->
+        <div class="key-wrapper"><div class="key white" data-key="C4"></div><div class="key black" data-key="C#4"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="D4"></div><div class="key black" data-key="D#4"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="E4"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="F4"></div><div class="key black" data-key="F#4"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="G4"></div><div class="key black" data-key="G#4"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="A4"></div><div class="key black" data-key="A#4"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="B4"></div></div>
+
+        <!-- Octave 5 -->
+        <div class="key-wrapper"><div class="key white" data-key="C5"></div><div class="key black" data-key="C#5"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="D5"></div><div class="key black" data-key="D#5"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="E5"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="F5"></div><div class="key black" data-key="F#5"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="G5"></div><div class="key black" data-key="G#5"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="A5"></div><div class="key black" data-key="A#5"></div></div>
+        <div class="key-wrapper"><div class="key white" data-key="B5"></div></div>
+
+        <!-- Octave 6 -->
+        <div class="key-wrapper"><div class="key white" data-key="C6"></div></div>
+
+    </div>
+
+</body>
+</html>

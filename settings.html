@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="logo">Name of APP</div>
+        <div class="current-song">User Settings</div>
+        <nav class="nav-icons">
+            <a href="index.html" class="home-icon">🏠</a>
+            <a href="songs.html">🎵</a> 
+            <a href="settings.html" class="nav-active">👤</a>
+        </nav>
+    </header>
+
+    <main class="settings-container">
+
+        <div class="setting-card preferences">
+            <h2>Preferences</h2>
+            <div class="setting-row">
+                <label for="practice-speed">Default Practice Speed:</label>
+                <select id="practice-speed">
+                    <option value="1.0">1.5x</option>
+                    <option value="1.0">1.25x</option>
+                    <option value="1.0">1.0x</option>
+                    <option value="0.75">0.75x</option>
+                    <option value="0.5">0.5x</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <label for="feedback-style">Feedback Style:</label>
+                <select id="feedback-style">
+                    <option value="numeric">Numeric</option>
+                    <option value="visual">Visual</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <label>Audio:</label>
+                <input type="range" class="audio-slider" min="0" max="100" value="75">
+            </div>
+        </div>
+
+        <div class="setting-card progress">
+            <h2>Progress</h2>
+            <div class="setting-row">
+                <span>Practice Time:</span>
+                <span class="value">125 mins</span>
+            </div>
+            <div class="setting-row">
+                <span>Finished Songs:</span>
+                <span class="value">9</span>
+            </div>
+        </div>
+
+        <div class="setting-card midi-library">
+            <h2>My MIDI Library</h2>
+            <div class="button-group">
+                <button class="btn">Play</button>
+                <button class="btn">Replace</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+        <div class="setting-card sync">
+            <h2>Sync & Back Up</h2>
+            <div class="setting-row">
+                <span>Last Synced:</span>
+                <span class="value">Today 18:41</span>
+            </div>
+            <div class="setting-row">
+                <span>Quick Sync:</span>
+                <span class="value">WiFi Only</span>
+            </div>
+        </div>
+
+        <div class="setting-card entity-data">
+            <h2>App Data</h2>
+            <div class="button-group">
+                <button id="reset-prefs" class="btn">Reset Preferences</button>
+                <button id="clear-cache" class="btn btn-danger">Clear Cache (not library)</button>
+                <button id="clear-all" class="btn btn-danger">Clear All Data</button>
+            </div>
+        </div>
+
+        <div class="footer-buttons">
+            <button class="btn btn-secondary">Back</button>
+            <button class="btn">Save</button>
+        </div>
+
+    </main>
+
+    <script src="settings.js"></script>
+</body>
+</html>

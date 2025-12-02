@@ -1,5 +1,6 @@
 const NOTE_ORDER = [
-    "C#3","D3","D#3","E3","F3","F#3","G3","G#3","A3","A#3","B3",
+    "C3","C#3","D3","D#3","E3",
+    "F3","F#3","G3","G#3","A3","A#3","B3",
     "C4","C#4","D4","D#4","E4","F4","F#4","G4","G#4","A4","A#4","B4",
     "C5","C#5","D5","D#5","E5","F5","F#5","G5","G#5","A5","A#5","B5",
     "C6"
@@ -40,7 +41,7 @@ function midiNumberToNote(midiNote) {
 async function playMidi(midi) {
     console.log("Playing MIDI with custom samples");
 
-    let now = 0; // seconds from start
+    let now = 0; //seconds from start
 
     midi.track.forEach(track => {
         track.event.forEach(event => {
@@ -58,4 +59,114 @@ async function playMidi(midi) {
         });
     });
 }
-        
+
+
+
+
+//midi parsing
+function buildPracticeSteps(midiJson) {
+    const stepsMap = new Map();
+
+    midiJson.track.forEach(track => {
+        let currentTime = 0;
+
+        track.event.forEach(event => {
+            
+            currentTime += event.deltaTime || 0;
+
+           
+            if (event.type === 9 && event.data && event.data[1] > 0) {
+                const midiNote = event.data[0];
+                const noteName = midiNumberToNote(midiNote);
+                if (!noteName) return;
+
+                if (!stepsMap.has(currentTime)) {
+                    stepsMap.set(currentTime, new Set());
+                }
+                stepsMap.get(currentTime).add(noteName);
+            }
+        });
+    });
+
+    const times = Array.from(stepsMap.keys()).sort((a, b) => a - b);
+
+    return times.map(time => ({
+        time,
+        notes: Array.from(stepsMap.get(time))
+    }));
+}
+
+//saves song information from parsing
+function saveCurrentSong(fileName, practiceSteps) {
+    const meta = {
+        name: fileName,
+        author: "You",
+        date: new Date().toLocaleDateString()
+    };
+
+    localStorage.setItem("currentSongMeta", JSON.stringify(meta));
+    localStorage.setItem("currentSongSteps", JSON.stringify(practiceSteps));
+}
+
+//renders song
+function renderUploadedSongsTable() {
+    const tbody = document.getElementById("uploaded-songs-body");
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+
+    const metaStr = localStorage.getItem("currentSongMeta");
+    if (!metaStr) return;
+
+    const meta = JSON.parse(metaStr);
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${meta.name}</td>
+        <td>${meta.author}</td>
+        <td>${meta.date}</td>
+        <td><span class="heart-icon active">♥</span></td>
+    `;
+    tbody.appendChild(row);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("songs.js DOM ready");
+
+    const uploadBtn = document.getElementById("upload-btn");
+    const midiInput = document.getElementById("midi-input");
+
+    renderUploadedSongsTable();
+
+    if (!uploadBtn || !midiInput) {
+        console.warn("Upload button or MIDI input not found");
+        return;
+    }
+
+    uploadBtn.addEventListener("click", () => {
+        midiInput.click();
+    });
+
+    if (typeof MidiParser === "undefined") {
+        console.error("MidiParser global not found");
+        alert("Error: MIDI parser library not loaded.");
+        return;
+    }
+
+    MidiParser.parse(midiInput, function(midiJson) {
+        const file = midiInput.files[0];
+        if (!file) {
+            console.warn("No file after parsing");
+            return;
+        }
+
+        console.log("Parsed MIDI JSON:", midiJson);
+
+        const steps = buildPracticeSteps(midiJson);
+
+        saveCurrentSong(file.name, steps);
+        renderUploadedSongsTable();
+
+        alert("MIDI loaded and selected! Go back to the Home page and press Play.");
+    });
+});

@@ -3,54 +3,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // notes
     const noteOrder = [
-        "C#3","D3","D#3","E3","F3","F#3","G3","G#3","A3","A#3","B3",
-        "C4","C#4","D4","D#4","E4","F4","F#4","G4","G#4","A4","A#4","B4",
-        "C5","C#5","D5","D#5","E5","F5","F#5","G5","G#5","A5","A#5","B5",
-        "C6"
-    ];
+    "C3","C#3","D3","D#3","E3",
+    "F3","F#3","G3","G#3","A3","A#3","B3",
+    "C4","C#4","D4","D#4","E4","F4","F#4","G4","G#4","A4","A#4","B4",
+    "C5","C#5","D5","D#5","E5","F5","F#5","G5","G#5","A5","A#5","B5",
+    "C6"
+];
 
     // mapping
     const noteToFile = {
-        "C#3": "d3.mp3",
-        "D3":  "csh3.mp3",
-        "D#3": "e3.mp3",
-        "E3":  "dsh3.mp3",
-        "F3":  "f3.mp3",
-        "F#3": "g3.mp3",
-        "G3":  "fsh3.mp3",
-        "G#3": "a3.mp3",
-        "A3":  "gsh3.mp3",
-        "A#3": "b3.mp3",
-        "B3":  "ash3.mp3",
+    // Octave 3
+    "C3":  "c3.mp3",
+    "C#3": "csh3.mp3",
+    "D3":  "d3.mp3",
+    "D#3": "dsh3.mp3",
+    "E3":  "e3.mp3",
+    "F3":  "f3.mp3",
+    "F#3": "fsh3.mp3",
+    "G3":  "g3.mp3",
+    "G#3": "gsh3.mp3",
+    "A3":  "a3.mp3",
+    "A#3": "ash3.mp3",
+    "B3":  "b3.mp3",
 
-        "C4":  "c4.mp3",
-        "C#4": "d4.mp3",
-        "D4":  "csh4.mp3",
-        "D#4": "e4.mp3",
-        "E4":  "dsh4.mp3",
-        "F4":  "f4.mp3",
-        "F#4": "g4.mp3",
-        "G4":  "fsh4.mp3",
-        "G#4": "a4.mp3",
-        "A4":  "gsh4.mp3",
-        "A#4": "b4.mp3",
-        "B4":  "ash4.mp3",
+    // Octave 4
+    "C4":  "c4.mp3",
+    "C#4": "csh4.mp3",
+    "D4":  "d4.mp3",
+    "D#4": "dsh4.mp3",
+    "E4":  "e4.mp3",
+    "F4":  "f4.mp3",
+    "F#4": "fsh4.mp3",
+    "G4":  "g4.mp3",
+    "G#4": "gsh4.mp3",
+    "A4":  "a4.mp3",
+    "A#4": "ash4.mp3",
+    "B4":  "b4.mp3",
 
-        "C5":  "c5.mp3",
-        "C#5": "d5.mp3",
-        "D5":  "csh5.mp3",
-        "D#5": "e5.mp3",
-        "E5":  "dsh5.mp3",
-        "F5":  "f5.mp3",
-        "F#5": "g5.mp3",
-        "G5":  "fsh5.mp3",
-        "G#5": "a5.mp3",
-        "A5":  "gsh5.mp3",
-        "A#5": "b5.mp3",
-        "B5":  "ash5.mp3",
+    // Octave 5
+    "C5":  "c5.mp3",
+    "C#5": "csh5.mp3",
+    "D5":  "d5.mp3",
+    "D#5": "dsh5.mp3",
+    "E5":  "e5.mp3",
+    "F5":  "f5.mp3",
+    "F#5": "fsh5.mp3",
+    "G5":  "g5.mp3",
+    "G#5": "gsh5.mp3",
+    "A5":  "a5.mp3",
+    "A#5": "ash5.mp3",
+    "B5":  "b5.mp3",
 
-        "C6":  "c6.mp3"
-    };
+    // Octave 6
+    "C6":  "c6.mp3"
+};
 
     const keys = Array.from(document.querySelectorAll(".keyboard .key"));
 
@@ -59,13 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
             "keys =", keys.length, "notes =", noteOrder.length);
     }
 
-    // Assign each key a musical note
+    //key mappings to notes
     keys.forEach((key, i) => {
         const note = noteOrder[i];
         key.dataset.note = note;
     });
 
-    // Styling for pressed key
+    //for pressing key
     const style = document.createElement("style");
     style.textContent = `
         .active-ui {
@@ -83,23 +89,25 @@ document.addEventListener("DOMContentLoaded", () => {
         audio.play();
     }
 
-    // Mouse → play
+    //allows mouse to play keyboard
     keys.forEach(key => {
-        key.addEventListener("mousedown", () => {
-            const note = key.dataset.note;
-            key.classList.add("active-ui");
-            playNote(note);
-        });
-
-        key.addEventListener("mouseup", () =>
-            key.classList.remove("active-ui")
-        );
-        key.addEventListener("mouseleave", () =>
-            key.classList.remove("active-ui")
-        );
+    key.addEventListener("mousedown", () => {
+        const note = key.dataset.note;
+        key.classList.add("active-ui");
+        playNote(note);
+        handleUserPlayedNote(note); // NEW
     });
 
-    // Computer keyboard mapping around 4th octave
+    key.addEventListener("mouseup", () =>
+        key.classList.remove("active-ui")
+    );
+    key.addEventListener("mouseleave", () =>
+        key.classList.remove("active-ui")
+    );
+});
+
+
+    //computer keyboard mappings
     const keyMap = {
         a: "C4",
         w: "C#4",
@@ -117,12 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.addEventListener("keydown", (e) => {
-        const note = keyMap[e.key];
-        if (!note) return;
-        const keyEl = keys.find(k => k.dataset.note === note);
-        if (keyEl) keyEl.classList.add("active-ui");
-        playNote(note);
-    });
+    const note = keyMap[e.key];
+    if (!note) return;
+    const keyEl = keys.find(k => k.dataset.note === note);
+    if (keyEl) keyEl.classList.add("active-ui");
+    playNote(note);
+    handleUserPlayedNote(note); // NEW
+});
 
     document.addEventListener("keyup", (e) => {
         const note = keyMap[e.key];
@@ -158,7 +167,7 @@ const midiSwap = {
     "B":  "A#"
 };
 
-// Apply swap, keeping octave correct
+// octave correction
 function applyCustomSwap(noteName) {
     const match = noteName.match(/^([A-G]#?)(\d)$/);
     if (!match) return noteName;
@@ -169,34 +178,33 @@ function applyCustomSwap(noteName) {
     return swappedPitch + octave;
 }
 
-// Highlight UI key
+//highlights key
 function highlightKey(note) {
     const key = document.querySelector(`.key[data-note="${note}"]`);
     if (key) key.classList.add("active-ui");
 }
 
-// Remove highlight
+//removes the highlight
 function unhighlightKey(note) {
     const key = document.querySelector(`.key[data-note="${note}"]`);
     if (key) key.classList.remove("active-ui");
 }
 
-// Handle incoming MIDI messages
+//midi logic
 function onMIDIMessage(message) {
     const [status, noteNumber, velocity] = message.data;
 
     let noteName = midiToNoteName(noteNumber);
 
-    // apply swaps
     noteName = applyCustomSwap(noteName);
 
-    // Key down
+    //key down
     if (status === 144 && velocity > 0) {
         playNote(noteName);
         highlightKey(noteName);
     }
 
-    // Key up
+    //key up
     if (status === 128 || (status === 144 && velocity === 0)) {
         unhighlightKey(noteName);
     }
@@ -220,6 +228,127 @@ if (navigator.requestMIDIAccess) {
 } else {
     console.warn("WebMIDI not supported in this browser.");
 }
+
+//new
+
+    // ====== Practice Mode using uploaded MIDI steps ======
+
+    const playButton = document.querySelector(".play-button");
+    const restartBtn = document.getElementById("restart-btn");
+    const currentSongLabel = document.querySelector(".current-song");
+
+    let practiceSteps = [];
+    let currentStepIndex = 0;
+    let waitingNotes = new Set();
+    let isPracticeRunning = false;
+
+    //local storage
+    function loadSongFromStorage() {
+        const metaStr = localStorage.getItem("currentSongMeta");
+        const stepsStr = localStorage.getItem("currentSongSteps");
+
+        if (metaStr && currentSongLabel) {
+            const meta = JSON.parse(metaStr);
+            currentSongLabel.textContent = meta.name;
+        }
+
+        if (stepsStr) {
+            practiceSteps = JSON.parse(stepsStr);
+        } else {
+            practiceSteps = [];
+        }
+    }
+
+    function clearAllKeyHighlights() {
+        keys.forEach(k => k.classList.remove("active-ui"));
+    }
+
+    //highlights current step
+    function showCurrentStep() {
+    clearAllKeyHighlights();
+
+    if (currentStepIndex >= practiceSteps.length) {
+        isPracticeRunning = false;
+        return;
+    }
+
+    const step = practiceSteps[currentStepIndex];
+
+    //waits for notes to be pressed correctly
+    waitingNotes = new Set();
+    step.notes.forEach(note => {
+        const keyEl = keys.find(k => k.dataset.note === note);
+        if (keyEl) {
+            keyEl.classList.add("active-ui");
+            waitingNotes.add(note);
+        }
+    });
+
+    // If this step had no playable notes (outside range of keyboard),immediately skip to the next step
+    if (waitingNotes.size === 0) {
+        advanceStep();
+    }
+}
+
+
+    //move to next step if correct
+    function advanceStep() {
+    currentStepIndex++;
+    if (currentStepIndex >= practiceSteps.length) {
+        clearAllKeyHighlights();
+        isPracticeRunning = false;
+        return;
+    }
+    showCurrentStep();
+}
+
+
+    //called whenver user plays a note
+function handleUserPlayedNote(note) {
+    if (!isPracticeRunning || waitingNotes.size === 0) return;
+    if (!waitingNotes.has(note)) return;
+
+    //remove highlight
+    unhighlightKey(note);
+
+    waitingNotes.delete(note);
+
+    if (waitingNotes.size === 0) {
+        advanceStep();
+    }
+}
+
+    //starts from beginning
+    function startPracticeFromBeginning() {
+        if (!practiceSteps.length) {
+            alert("No MIDI song selected. Go to the Songs page and upload a MIDI file first.");
+            return;
+        }
+        currentStepIndex = 0;
+        isPracticeRunning = true;
+        showCurrentStep();
+    }
+
+    //play button
+    if (playButton) {
+        playButton.addEventListener("click", () => {
+            startPracticeFromBeginning();
+        });
+    }
+
+    //restart
+    if (restartBtn) {
+        restartBtn.addEventListener("click", () => {
+            startPracticeFromBeginning();
+        });
+    }
+
+  
+    loadSongFromStorage();
+
+   
+    window.handleUserPlayedNote = handleUserPlayedNote;
+
 
 
 });

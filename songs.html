@@ -26,10 +26,12 @@
         
         <div class="search-bar-container">
             <input type="search" class="search-bar" placeholder="Search for songs...">
-            <button class="upload-btn">
-                <span>📤</span> 
-                Upload File
-            </button>
+                <button class="upload-btn" id="upload-btn">
+                <span>📤</span>
+                Upload MIDI
+                </button>
+
+             <input type="file" id="midi-input" accept=".mid,.midi" style="display:none">
         </div>
         
         <h2>Recommended Songs</h2>
@@ -68,19 +70,13 @@
                     <th>Save</th>
                 </tr>
             </thead>
-            <tbody id="uploaded-songs-body">
-                <tr>
-                    <td>My_Song_Final.mid</td>
-                    <td>You</td>
-                    <td>11/09/2025</td>
-                    <td><span class="heart-icon">♡</span></td>
-                </tr>
-            </tbody>
+            <tbody id="uploaded-songs-body"></tbody>
+
         </table>
 
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/midi-parser-js@4.0.4/build/midi-parser.min.js"></script>
-    
+    <script src="https://colxi.info/midi-parser-js/src/main.js"></script>
     <script src="songs.js"></script>
+
 </body>
 </html>
